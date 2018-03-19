@@ -1,20 +1,21 @@
-#!/usr/local/bin/python
+#!/usr/local/bin/python3
 # -*- coding:utf-8 -*-
 
 import sys, getopt
 import numpy as np
 
 def disp_help():
-	print 'A pyhton template for statistics of a table data.\n\
-Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)\n\
-Usage: tableinfo -i<infile> [-j<head-record>] [-c<column1>,<column2>...] [-s<split-symbol>] [-r<row-min>,<row-max>,<row-min2>,<row-max2>...]\n\
+	proname = (sys.argv[0]).strip().split('/')
+	print ('A pyhton template for statistics of a table data.\n\
+Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)\n')
+	print ('Usage: '+proname[-1]+' -i<infile> [-j<head-record>] [-c<column1>,<column2>...] [-s<split-symbol>] [-r<row-min>,<row-max>,<row-min2>,<row-max2>...]\n\
 -i --ifile\tinput table name\n\
 -j --jumphead\tskip head records. the default value is 0\n\
 -c --column\tdata columns. the default value is 1 which represents the third column of a input table\n\
 -s --symbol\tline spliting symbol. the default values are space and tab\n\
 -r --rows\tset begining and ending rows of data that used for calculation, the default will will all data.\n\
 \t\tNote that this option may take multiple row indices groups that each of them has a strart and end indice\n\
--h --help\tshow this information'
+-h --help\tshow this information')
 
 def tableinfo(infile,sline,lines,rows,ssymbol):
 	file = open(infile,'r')

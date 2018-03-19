@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/usr/local/bin/python3
 # -*- coding:utf-8 -*-
 
 import sys, getopt
@@ -7,10 +7,11 @@ import matplotlib.cm as cm
 import matplotlib.pyplot as plt
 
 def disp_help():
-	print 'This a pyhton template for using matplotlib to plot a figure or figures for a xyz data set. \
+	proname = (sys.argv[0]).strip().split('/')
+	print ('This a pyhton template for using matplotlib to plot a figure or figures for a xyz data set. \
 For more information please go to the offical site of matplotlib "http://matplotlib.org/"\n\
-Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)\n\
-Usage: pyplot-plane -i<file> -s|-o<file>,<file>,... [-j<head-record>] [-t<xmin>/<dx>/<xmax>/<ymin>/<dy>/<ymax>] [-a<x-label>,<y-label>] [{-d<data-row>,<data-row>,... -l<legend>,... -u<unit>,...}]\n\
+Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)\n')
+	print ('Usage: '+proname[-1]+' -i<file> -s|-o<file>,<file>,... [-j<head-record>] [-t<xmin>/<dx>/<xmax>/<ymin>/<dy>/<ymax>] [-a<x-label>,<y-label>] [{-d<data-row>,<data-row>,... -l<legend>,... -u<unit>,...}]\n\
 -i --ifile\tinput-file name (*.txt *.xyz *.dat)\n\
 -d --data-line\tselect data rows, the default is 2 for data values\n\
 -j --jump-head\tskip head records as indicated by the parameter, the default is 0\n\
@@ -20,7 +21,7 @@ Usage: pyplot-plane -i<file> -s|-o<file>,<file>,... [-j<head-record>] [-t<xmin>/
 -l --legend\tset figure titles, the default is \'data\'. The number of legends must equal the number of data rows\n\
 -a --axis-label\tset x and y axises\' labels, the default are \'x (m)\' and \'y (m)\'\n\
 -s --screen\tonly show the figure on screen and do not save the figure\n\
--h --help\tshow this information'
+-h --help\tshow this information')
 
 def single_figure(fig,ax,data,title,unit,dataRange):
 	cax = ax.imshow(data,cmap=cm.rainbow,
@@ -110,11 +111,11 @@ def main(argv):
 		sys.exit()
 
 	if onlyScreen == False and outputFile[0] == '':
-		print 'error: no output-file name'
+		print ('error: no output-file name')
 		sys.exit()
 
 	if onlyScreen == True and outputFile[0] != '':
-		print 'error: -o and -s can not be used at the same time'
+		print ('error: -o and -s can not be used at the same time')
 		sys.exit()
 
 	plot_planes(inputFile,outputFile,dataLine,startLine,dataInterval,dataLegend,axisLabel,dataUnit,onlyScreen)

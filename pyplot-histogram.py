@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/usr/local/bin/python3
 # -*- coding:utf-8 -*-
 
 import sys, getopt
@@ -8,10 +8,11 @@ import numpy as np
 
 # 显示帮助信息
 def disp_help():
-    print 'This a pyhton template for using matplotlib to plot a histogram figure. \
+    proname = (sys.argv[0]).strip().split('/')
+    print ('This a pyhton template for using matplotlib to plot a histogram figure. \
 For more information please go to the offical site of matplotlib "http://matplotlib.org/"\n\
-Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)\n\
-Usage: pyplot-histogram -i<inputfile> -o<outputfile>|-s [-j<head-record>] [-n<num1>,<num2>,...] [-d<y-row1>,<y-row2>,...] [-l<legend1>,<legend2>,...] [-a<x-label>,<y-label>]\n\
+Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)\n')
+    print ('Usage: '+proname[-1]+' -i<inputfile> -o<outputfile>|-s [-j<head-record>] [-n<num1>,<num2>,...] [-d<y-row1>,<y-row2>,...] [-l<legend1>,<legend2>,...] [-a<x-label>,<y-label>]\n\
 -i --ifile\tinput-file name (*.txt *.xyz *.dat)\n\
 -d --data-line\tselect data rows, the default is 0\n\
 -j --jump-head\tskip head records as indicated by the parameter, the default is zero\n\
@@ -20,7 +21,7 @@ Usage: pyplot-histogram -i<inputfile> -o<outputfile>|-s [-j<head-record>] [-n<nu
 -l --legend\tset data legends, the default is \'data\'. The number of legends must equal the number of y rows\n\
 -a --axis-label\tset x and y axises\' labels, the default are \'value\' and \'count\'\n\
 -s --screen\tonly show the figure on screen and do not save the figure\n\
--h --help\tshow this information'
+-h --help\tshow this information')
 
 def plot_lines(infile,outfile,lines,sline,legend,labels,bars,ifSavefig):
     # 按行读取文件 从sline开始按空格分割数据

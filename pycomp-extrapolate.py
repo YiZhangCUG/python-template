@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/usr/local/bin/python3
 # -*- coding:utf-8 -*-
 
 import sys, getopt
@@ -6,10 +6,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def disp_help():
-	print 'This is a pyhton template preforming the extrapolation of a set of data points or multiple sets using the least squares polynomial fit. \
+	proname = (sys.argv[0]).strip().split('/')
+	print ('This is a pyhton template preforming the extrapolation of a set of data points or multiple sets using the least squares polynomial fit. \
 For more information please go to the offical site of matplotlib "http://matplotlib.org/"\n\
-Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)\n\
-Usage: pyplot-polyfit -i<inputfile> -o<outputfile>|-s [-j<head-record>] [-p<deg>] [-e<xmin>,<xmax>,<dx>|-f<referfile>] [-r<rmin>,<ramx>] [-d<x-row>,<y-row1>,<y-row2>,...] [-l<legend>,...] [-a<x-label>,<y-label>]\n\
+Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)\n')
+	print ('Usage: '+proname[-1]+' -i<inputfile> -o<outputfile>|-s [-j<head-record>] [-p<deg>] [-e<xmin>,<xmax>,<dx>|-f<referfile>] [-r<rmin>,<ramx>] [-d<x-row>,<y-row1>,<y-row2>,...] [-l<legend>,...] [-a<x-label>,<y-label>]\n\
 -i --ifile\tinput-file name (*.txt *.xyz *.dat)\n\
 -f --referfile\ttake a one columon file that indicates special locations for extrapolation\n\
 -d --data-line\tselect x row and y rows, the default is 0 for x, 1 for y\n\
@@ -21,7 +22,7 @@ Usage: pyplot-polyfit -i<inputfile> -o<outputfile>|-s [-j<head-record>] [-p<deg>
 -l --legend\tset data legends, the default is \'data\'. The number of legends must equal the number of y rows\n\
 -a --axis-label\tset x and y axises\' labels, the default are \'x\' and \'y\'\n\
 -s --screen\tonly show the figure on screen and do not save the figure\n\
--h --help\tshow this information'
+-h --help\tshow this information')
 
 def poly_extrapolate(infile,outfile,refile,lines,rows,degrees,sline,elimit,legend,labels,ifSavefig):
 	# 按行读取文件 从sline开始按空格分割数据

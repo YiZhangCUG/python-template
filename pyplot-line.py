@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/usr/local/bin/python3
 # -*- coding:utf-8 -*-
 
 import sys, getopt
@@ -13,10 +13,10 @@ a_very_big_int = 1e+30
 # 显示帮助信息
 def disp_help():
     proname = (sys.argv[0]).strip().split('/')
-    print 'This a pyhton template for using matplotlib to plot a one line or multiple lines figure. \
+    print ('This a pyhton template for using matplotlib to plot a one line or multiple lines figure. \
 For more information please go to the offical site of matplotlib "http://matplotlib.org/"\n\
-Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)'
-    print 'Usage: '+proname[-1]+' -i<inputfile> -o<outputfile>|-s [-t<fig-title>] [-j<head-record>] [-f<ref-col>,<ref-index>,<ref-index>...] [-r<rmin>,<ramx>,<rmin2>,<rmax2>....] [-d<x-col>,<y-col1>,<y-col2>,...] [-l<legend>,...] [-a<x-label>,<y-label>] [-y<layout>,<layout>...]\n\
+Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)')
+    print ('Usage: '+proname[-1]+' -i<inputfile> -o<outputfile>|-s [-t<fig-title>] [-j<head-record>] [-f<ref-col>,<ref-index>,<ref-index>...] [-r<rmin>,<ramx>,<rmin2>,<rmax2>....] [-d<x-col>,<y-col1>,<y-col2>,...] [-l<legend>,...] [-a<x-label>,<y-label>] [-y<layout>,<layout>...]\n\
 -i --ifile\tinput-file name (*.txt *.xyz *.dat).\n\
 -o --ofile\toutput-file name (*.jpg *.png *.pdf *.eps ...).\n\
 -s --screen\tonly show the figure on screen and do not save the figure.\n\
@@ -35,7 +35,7 @@ Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)'
 \t\t0 everyday use\n\
 \t\t1 article\n\
 \t\t2 use white color for ticks and tick labels\n\
--h --help\tshow this information.'
+-h --help\tshow this information.')
 
 def plot_lines(infile,outfile,figtitle,lines,refers,rows,sline,legend,labels,ifSavefig,style):
     # 循环绘图 按legend绘制图例
@@ -98,7 +98,7 @@ def plot_lines(infile,outfile,figtitle,lines,refers,rows,sline,legend,labels,ifS
             ax.xaxis.label.set_color('w')
             ax.yaxis.label.set_color('w')
         else:
-            print 'error: wrong layout style'
+            print ('error: wrong layout style')
             sys.exit()
 #############以下是数据提取处理部分#####################
     # 按行读取文件 从sline开始按空格分割数据

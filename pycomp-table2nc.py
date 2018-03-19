@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/usr/local/bin/python3
 # -*- coding:utf-8 -*-
 
 import sys, getopt
@@ -7,9 +7,10 @@ from scipy.io import netcdf
 import copy
 
 def disp_help():
-	print 'This a pyhton template for converting a table with multiple data columns into a netcdf file.\n\
-Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)\n\
-Usage: table2nc <infile> -o<outfile> [-f<format>] [-d<order>] [-r<xmin>/<xmax>/<ymin>/<ymax>] [-i<dx>/<dy>] [-j<head-record>] [-c<column1>,<column2>...] [-t<name>...] [-u<unit1>,<unit2>...] [-a<x-label>/<y-label>]\n\
+	proname = (sys.argv[0]).strip().split('/')
+	print ('This a pyhton template for converting a table with multiple data columns into a netcdf file.\n\
+Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)\n')
+	print ('Usage: '+proname[-1]+' <infile> -o<outfile> [-f<format>] [-d<order>] [-r<xmin>/<xmax>/<ymin>/<ymax>] [-i<dx>/<dy>] [-j<head-record>] [-c<column1>,<column2>...] [-t<name>...] [-u<unit1>,<unit2>...] [-a<x-label>/<y-label>]\n\
 -o --ofile\toutput grid file\'s name. a .nc extension will be add automaticly to ensure proper recognition\n\
 -r --range\tdata area. default values are 0/1000/0/1000\n\
 -i --interval\tdata spacing. default values are 10/10\n\
@@ -21,7 +22,7 @@ Usage: table2nc <infile> -o<outfile> [-f<format>] [-d<order>] [-r<xmin>/<xmax>/<
 -f --format\tthe start point of data. the default is lower-left corner. set -f to upper-left to change the start point\n\
 -d --order\tdata arrangement order. the default order is x values change firstly then y values. set -d to -1 reserve the order\n\
 -g --geoframe\tset if the data is under geographic/geocentric coordinates, this option will set dimensions in the ouput file into \'longitude\' and \'latitude\'\n\
--h --help\tshow this information'
+-h --help\tshow this information')
 
 def table2nc(infile,ofile,labels,dimens,lines,sline,ranges,interval,titles,units,formats,orders):
 	filein = open(infile,'r')
@@ -96,7 +97,7 @@ def main(argv):
 	dataOrder = 0
 
 	if len(sys.argv) == 1:
-		print 'use -h option to see help information'
+		print ('use -h option to see help information')
 		sys.exit()
 	# the first argument will allways be the input file name
 	inputFile = sys.argv[1]

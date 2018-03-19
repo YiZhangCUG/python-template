@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/usr/local/bin/python3
 # -*- coding:utf-8 -*-
 
 import sys, getopt
@@ -8,16 +8,17 @@ import matplotlib.tri as tri
 import matplotlib.mlab as mlab
 
 def disp_help():
-	print 'This a pyhton template for using matplotlib to plot a contour map of random distributed data. \
+	proname = (sys.argv[0]).strip().split('/')
+	print ('This a pyhton template for using matplotlib to plot a contour map of random distributed data. \
 For more information please go to the offical site of matplotlib "http://matplotlib.org/"\n\
-Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)\n\
-Usage: pyplot-random -i<inputfile> [-d<line1,line2,line3>] [-j<head-record>] -o<outputfile>|-s\n\
+Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)\n')
+	print ('Usage: '+proname[-1]+' -i<inputfile> [-d<line1,line2,line3>] [-j<head-record>] -o<outputfile>|-s\n\
 -i --ifile\tinput-file name (*.txt *.xyz *.dat)\n\
 -d --data-line\tselect two lines as input data, defaults are the first two lines\n\
 -j --jump-head\tskip head records as indicated by the parameter, the default is zero\n\
 -o --ofile\toutput-file name (*.jpg *.png *.pdf *.eps ...)\n\
 -s --screen\tonly show the figure on screen and do not save the figure\n\
--h --help\tshow this information'
+-h --help\tshow this information')
 
 def plot_random(infile,outfile,lines,sline,ifSavefig):
 	file = open(infile,'r')
