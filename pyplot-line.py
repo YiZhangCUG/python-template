@@ -35,6 +35,7 @@ Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)')
 \t\t0 everyday use\n\
 \t\t1 article\n\
 \t\t2 use white color for ticks and tick labels\n\
+\t\t3 profile\n\
 -h --help\tshow this information.')
 
 def plot_lines(infile,outfile,figtitle,lines,refers,rows,sline,legend,labels,ifSavefig,style):
@@ -44,14 +45,14 @@ def plot_lines(infile,outfile,figtitle,lines,refers,rows,sline,legend,labels,ifS
     for s in style:
         if s == 0:
             # everyday use
-            title_font = {'fontname':'Arial','size':'14','color':'black','weight':'normal','verticalalignment':'bottom'}
-            axis_font = {'fontname':'Arial','size':'12'}
+            title_font = {'fontname':'Times New Roman','size':'14','color':'black','weight':'normal','verticalalignment':'bottom'}
+            axis_font = {'fontname':'Times New Roman','size':'12'}
             legend_size = 12
             line_widths = 1.5
             save_dpi = 300
             # 按label绘制轴的单位
             for l in (ax.get_xticklabels() + ax.get_yticklabels()):
-                l.set_fontname('Arial')
+                l.set_fontname('Times New Roman')
                 l.set_fontsize(12)
             ax.set_xlabel(labels[0],**axis_font)
             ax.set_ylabel(labels[1],**axis_font)
@@ -71,14 +72,14 @@ def plot_lines(infile,outfile,figtitle,lines,refers,rows,sline,legend,labels,ifS
         elif s == 1:
             # article
             fig.set_size_inches(3,1.854) #文章中使用的大小 英寸 平时不需要使用
-            title_font = {'fontname':'Arial','size':'7','color':'black','weight':'normal','verticalalignment':'bottom'}
-            axis_font = {'fontname':'Arial','size':'6.5'}
+            title_font = {'fontname':'Times New Roman','size':'7','color':'black','weight':'normal','verticalalignment':'bottom'}
+            axis_font = {'fontname':'Times New Roman','size':'6.5'}
             legend_size = 6.5
             line_widths = 1
             save_dpi = 300
             # 按label绘制轴的单位
             for l in (ax.get_xticklabels() + ax.get_yticklabels()):
-                l.set_fontname('Arial')
+                l.set_fontname('Times New Roman')
                 l.set_fontsize(6.5)
             ax.set_xlabel(labels[0],**axis_font)
             ax.set_ylabel(labels[1],**axis_font)
@@ -94,9 +95,63 @@ def plot_lines(infile,outfile,figtitle,lines,refers,rows,sline,legend,labels,ifS
             else: plt.title(figtitle,**title_font)
             plt.tight_layout(pad=0)
         elif s == 2:
+            # everyday use
+            title_font = {'fontname':'Times New Roman','size':'14','color':'black','weight':'normal','verticalalignment':'bottom'}
+            axis_font = {'fontname':'Times New Roman','size':'12'}
+            legend_size = 12
+            line_widths = 1.5
+            save_dpi = 300
+            # 按label绘制轴的单位
+            for l in (ax.get_xticklabels() + ax.get_yticklabels()):
+                l.set_fontname('Times New Roman')
+                l.set_fontsize(12)
+            ax.set_xlabel(labels[0],**axis_font)
+            ax.set_ylabel(labels[1],**axis_font)
+            ax.yaxis.set_ticks_position('both')
             ax.tick_params(axis='both',colors='w')
             ax.xaxis.label.set_color('w')
             ax.yaxis.label.set_color('w')
+            ax.autoscale(tight=True)
+            ax.spines['left'].set_visible(False)
+            ax.spines['right'].set_visible(False)
+            ax.spines['top'].set_visible(False)
+            ax.spines['bottom'].set_visible(False)
+            ax.grid(color='lightgrey',linestyle='--',linewidth=0.5)
+            # 绘制图名
+            if figtitle == '': plt.title(infile,**title_font)
+            else: plt.title(figtitle,**title_font)
+            # 注意adjust和tight_layout不要同时使用 或者可以保存为eps文件 在别的处理软件里处理边框
+            #fig.subplots_adjust(left=0.14,right=0.99,bottom=0.18)
+            plt.tight_layout()
+        elif s == 3:
+            # profile
+            fig.set_size_inches(2,3) #文章中使用的大小 英寸 平时不需要使用
+            title_font = {'fontname':'Times New Roman','size':'12','color':'black','weight':'normal','verticalalignment':'bottom'}
+            axis_font = {'fontname':'Times New Roman','size':'12'}
+            legend_size = 12
+            line_widths = 1.5
+            save_dpi = 300
+            # 按label绘制轴的单位
+            for l in (ax.get_xticklabels() + ax.get_yticklabels()):
+                l.set_fontname('Times New Roman')
+                l.set_fontsize(12)
+            ax.set_xlabel(labels[0],**axis_font)
+            ax.set_ylabel(labels[1],**axis_font)
+            # 反转y轴
+            ax.invert_yaxis()
+            ax.yaxis.set_ticks_position('both')
+            ax.autoscale(tight=True)
+            ax.spines['left'].set_visible(False)
+            ax.spines['right'].set_visible(False)
+            ax.spines['top'].set_visible(False)
+            ax.spines['bottom'].set_visible(False)
+            ax.grid(color='lightgrey',linestyle='--',linewidth=0.5)
+            # 绘制图名
+            if figtitle == '': plt.title(infile,**title_font)
+            else: plt.title(figtitle,**title_font)
+            # 注意adjust和tight_layout不要同时使用 或者可以保存为eps文件 在别的处理软件里处理边框
+            #fig.subplots_adjust(left=0.14,right=0.99,bottom=0.18)
+            plt.tight_layout()
         else:
             print ('error: wrong layout style')
             sys.exit()
