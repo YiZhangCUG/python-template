@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/usr/local/bin/python3
 # -*- coding:utf-8 -*-
 
 import sys, getopt
@@ -18,15 +18,16 @@ def convert2DListTo1DList(list):
 	return result
 
 def disp_help():
-	print 'This a pyhton template for forward calculating a shpere\'s gravitational field.\n\
-Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)\n\
-Usage: grav2d-sphere -o<outputfile>|-s [-a<xmin>/<xmax>/<ymin>/<ymax>] [-d<x_num>/<y_num>] [-p<sph-posi-x>/<sph-posi-y>/<sph-depth>/<sph-radius>/<sph-rho>]\n\
--a --area\tcomputation area. default values are 0/1000/0/1000\n\
+	proname = (sys.argv[0]).strip().split('/')
+	print ('This a pyhton template for forward calculating a shpere\'s gravitational field on a plane.\n\
+Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)\n')
+	print ('Usage: '+proname[-1]+' -o<outputfile>|-s [-r<xmin>/<xmax>/<ymin>/<ymax>] [-d<x_num>/<y_num>] [-p<sph-posi-x>/<sph-posi-y>/<sph-depth>/<sph-radius>/<sph-rho>]\n\
+-r --range\tcomputation area. default values are 0/1000/0/1000\n\
 -d --dimension\tobservation points in x and y directions. default values are 101/101\n\
 -p --parameter\tgeometric and physcial parameters of a sphere. default values are 500/500/200/50/1.0\n\
 -o --ofile\toutput-file name. The programe will save a .png image file and a .nc grid file\n\
 -s --screen\tonly show the figure on screen and do not save the figure and data\n\
--h --help\tshow this information'
+-h --help\tshow this information')
 
 def sub_figure(fig,ax,data,title,unit,dataRange):
 	cax = ax.imshow(data,cmap=cm.rainbow,
@@ -99,7 +100,7 @@ def main(argv):
 	outputfile = ''
 
 	try:
-		opts, args = getopt.getopt(argv,"ha:d:p:o:s",["help","area=","dimension=","parameter=","ofile=","screen="])
+		opts, args = getopt.getopt(argv,"hr:d:p:o:s",["help","range=","dimension=","parameter=","ofile=","screen="])
 	except getopt.GetoptError:
 		disp_help()
 		sys.exit(2)
@@ -107,7 +108,7 @@ def main(argv):
 		if opt in ("-h", "--help"):
 			disp_help()
 			sys.exit()
-		elif opt in ("-a", "--area"):
+		elif opt in ("-r", "--range"):
 			area = map(float, arg.strip().split('/'))
 		elif opt in ("-d", "--dimension"):
 			dimension = map(float, arg.strip().split('/'))
