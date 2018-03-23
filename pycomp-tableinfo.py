@@ -27,25 +27,25 @@ def tableinfo(infile,sline,lines,rows,ssymbol):
 	file.close()
 
 	if rows[0] == -1:
-		yValues = np.zeros((len(lineList),len(lines)))
+		yValues = np.zeros((len(lineList),len(list(lines))))
 		count = 0
-		for l in map(int,lines[:]):
+		for l in list(map(int,lines)):
 			for h in range(len(lineList)):
 				yValues[h][count] = float(lineList[h][l])
 			count += 1
 		oneY = np.zeros(len(lineList))
-		for l in range(len(lines)):
-			oneY = map(float,[x[l] for x in yValues])
-			print('statistics of data column: '+str(lines[l]))
-			print('number of inputs: '+str(len(oneY)))
+		for l in range(len(list(lines))):
+			oneY = list(map(float,[x[l] for x in yValues]))
+			print('statistics of data column: '+str(lines[l])+"\n")
+			print('number of inputs: '+str(len(list(oneY))))
 			print('-------------------------------')
-			print('minima\t|\t'+str(np.nanmin(oneY)))
-			print('maxima\t|\t'+str(np.nanmax(oneY)))
-			print('range\t|\t'+str(np.ptp(oneY)))
-			print('median\t|\t'+str(np.nanmedian(oneY)))
-			print('mean\t|\t'+str(np.nanmean(oneY)))
-			print('std\t|\t'+str(np.nanstd(oneY)))
-			print('var\t|\t'+str(np.nanvar(oneY)))
+			print('minima\t|\t'+str(np.nanmin(list(oneY))))
+			print('maxima\t|\t'+str(np.nanmax(list(oneY))))
+			print('range\t|\t'+str(np.ptp(list(oneY))))
+			print('median\t|\t'+str(np.nanmedian(list(oneY))))
+			print('mean\t|\t'+str(np.nanmean(list(oneY))))
+			print('std\t|\t'+str(np.nanstd(list(oneY))))
+			print('var\t|\t'+str(np.nanvar(list(oneY))))
 			print('-------------------------------')
 	else:
 		index = []
@@ -96,9 +96,9 @@ def main(argv):
 		elif opt in ("-j","--jumphead"):
 			startLine = int(arg)
 		elif opt in ("-c","--column"):
-			dataLine = map(int,arg.strip().split(','))
+			dataLine = list(map(int,arg.strip().split(',')))
 		elif opt in ("-r","--rows"):
-			dataRow = map(int,arg.strip().split(','))
+			dataRow = list(map(int,arg.strip().split(',')))
 		elif opt in ("-s","-symbol"):
 			splitSymbol = arg
 
