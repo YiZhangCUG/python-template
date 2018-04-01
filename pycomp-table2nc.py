@@ -123,19 +123,19 @@ def main(argv):
 		elif opt in ("-j","--jumphead"):
 			startLine = int(arg)
 		elif opt in ("-c","--column"):
-			dataLine = map(int,arg.strip().split(','))
+			dataLine = list(map(int,arg.strip().split(',')))
 		elif opt in ("-d","--order"):
 			dataOrder= int(arg)
 		elif opt in ("-r","--range"):
-			dataRange = map(float,arg.strip().split('/'))
+			dataRange = list(map(float,arg.strip().split('/')))
 		elif opt in ("-i","--interval"):
-			dataInterval = map(float,arg.strip().split('/'))
+			dataInterval = list(map(float,arg.strip().split('/')))
 		elif opt in ("-t","--title"):
-			dataTitle = map(str,arg.strip().split(','))
+			dataTitle = list(map(str,arg.strip().split(',')))
 		elif opt in ("-u","--unit"):
-			dataUnit = map(str,arg.strip().split(','))
+			dataUnit = list(map(str,arg.strip().split(',')))
 		elif opt in ("-a","--axislabel"):
-			axislabel = map(str,arg.strip().split(','))
+			axislabel = list(map(str,arg.strip().split(',')))
 
 	if inputFile == '':
 		print('error: no input-file name')
