@@ -5,6 +5,7 @@ import sys, getopt
 import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
 import numpy as np
+import copy
 
 # 显示帮助信息
 def disp_help():
@@ -27,6 +28,11 @@ def plot_lines(infile,outfile,lines,sline,legend,labels,bars,ifSavefig):
     # 按行读取文件 从sline开始按空格分割数据
     file = open(infile,'r')
     lineList = file.readlines()
+    # 默认忽略#号开头的行
+    lineList_orig = copy.deepcopy(lineList)
+    for line in lineList_orig:
+        if line.startswith('#'):
+            lineList.remove(line)
     lineList = [line.strip().split( ) for line in lineList[sline:]]
     file.close()
     # 初始化yValues
@@ -49,8 +55,9 @@ def plot_lines(infile,outfile,lines,sline,legend,labels,bars,ifSavefig):
     fig, screen = plt.subplots()
     oneY = np.zeros(len(lineList))
     for l in range(len(lines)):
-        oneY = map(float,[x[l] for x in yValues])
-        screen.hist(oneY, bars[l], normed=1,label=legend[l])
+        oneY = list(map(float,[x[l] for x in yValues]))
+        #screen.hist(oneY, bars[l], normed=1,label=legend[l])
+        screen.hist(oneY, bars[l],label=legend[l])
     screen.legend(loc='upper right', fontsize='large')
     # 按label绘制轴的单位
     screen.set_xlabel(labels[0])
@@ -90,13 +97,13 @@ def main(argv):
         elif opt in ("-j", "--jump-head"):
             startLine = int(arg)
         elif opt in ("-d", "--data-line"):
-            dataLine = map(int,arg.strip().split(','))
+            dataLine = list(map(int,arg.strip().split(',')))
         elif opt in ("-n", "--bar-num"):
-            barNum = map(int,arg.strip().split(','))
+            barNum = list(map(int,arg.strip().split(',')))
         elif opt in ("-l", "--legend"):
-            dataLegend = map(str,arg.strip().split(','))
+            dataLegend = list(map(str,arg.strip().split(',')))
         elif opt in ("-a", "--axis-label"):
-            axisLabel = map(str,arg.strip().split(','))
+            axisLabel = list(map(str,arg.strip().split(',')))
     # 检查参数
     if inputfile == '':
         disp_help()
