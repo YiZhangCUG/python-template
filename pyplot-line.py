@@ -176,31 +176,31 @@ def plot_lines(infile,outfile,figtitle,lines,refers,rows,sline,legend,labels,ifS
                 yValues = np.zeros((len(lineList),len(lines)-1))
 
                 count = 0
-                for l in map(int,lines[1:]):
+                for l in list(map(int,lines[1:])):
                     for h in range(len(lineList)):
                         yValues[h][count] = float(lineList[h][l])
                     count += 1
 
                 oneY = np.zeros(len(lineList))
                 for l in range(len(lines)-1):
-                    oneY = map(float,[x[l] for x in yValues])
+                    oneY = list(map(float,[x[l] for x in yValues]))
                     ax.plot(xValues,oneY,linewidth=line_widths)
             else:
-                xValues = map(float,[x[lines[0]] for x in lineList])
+                xValues = list(map(float,[x[lines[0]] for x in lineList]))
                 yValues = np.zeros((len(lineList),len(lines)-1))
 
                 count = 0
-                for l in map(int,lines[1:]):
+                for l in list(map(int,lines[1:])):
                     for h in range(len(lineList)):
                         yValues[h][count] = float(lineList[h][l])
                     count += 1
 
                 oneY = np.zeros(len(lineList))
                 for l in range(len(lines)-1):
-                    oneY = map(float,[x[l] for x in yValues])
+                    oneY = list(map(float,[x[l] for x in yValues]))
                     ax.plot(xValues,oneY,linewidth=line_widths)
         else:
-            for r in map(float,refers[1:]):
+            for r in list(map(float,refers[1:])):
                 index = []
                 for h in range(len(lineList)):
                     if float(lineList[h][int(refers[0])]) == r:
@@ -212,7 +212,7 @@ def plot_lines(infile,outfile,figtitle,lines,refers,rows,sline,legend,labels,ifS
                     yValues = np.zeros((len(index),len(lines)-1))
 
                     count = 0
-                    for l in map(int,lines[1:]):
+                    for l in list(map(int,lines[1:])):
                         count2 = 0
                         for h in index:
                             yValues[count2][count] = float(lineList[h][l])
@@ -221,7 +221,7 @@ def plot_lines(infile,outfile,figtitle,lines,refers,rows,sline,legend,labels,ifS
 
                     oneY = np.zeros(len(index))
                     for l in range(len(lines)-1):
-                        oneY = map(float,[x[l] for x in yValues])
+                        oneY = list(map(float,[x[l] for x in yValues]))
                         ax.plot(xValues,oneY,linewidth=line_widths)
                 else:
                     count = 0
@@ -231,7 +231,7 @@ def plot_lines(infile,outfile,figtitle,lines,refers,rows,sline,legend,labels,ifS
                     yValues = np.zeros((len(index),len(lines)-1))
 
                     count = 0
-                    for l in map(int,lines[1:]):
+                    for l in list(map(int,lines[1:])):
                         count2 = 0
                         for h in index:
                             yValues[count2][count] = float(lineList[h][l])
@@ -240,7 +240,7 @@ def plot_lines(infile,outfile,figtitle,lines,refers,rows,sline,legend,labels,ifS
 
                     oneY = np.zeros(len(index))
                     for l in range(len(lines)-1):
-                        oneY = map(float,[x[l] for x in yValues])
+                        oneY = list(map(float,[x[l] for x in yValues]))
                         ax.plot(xValues,oneY,linewidth=line_widths)
     else:
         if refers[0] == a_very_big_int:
@@ -250,32 +250,32 @@ def plot_lines(infile,outfile,figtitle,lines,refers,rows,sline,legend,labels,ifS
                     yValues = np.zeros((len(lineList[rows[2*r]:rows[2*r+1]]),len(lines)-1))
 
                     count = 0
-                    for l in map(int,lines[1:]):
+                    for l in list(map(int,lines[1:])):
                         for h in range(len(lineList[rows[2*r]:rows[2*r+1]])):
                             yValues[h][count] = float(lineList[h+rows[2*r]][l])
                         count += 1
 
                     oneY = np.zeros(len(lineList))
                     for l in range(len(lines)-1):
-                        oneY = map(float,[x[l] for x in yValues])
+                        oneY = list(map(float,[x[l] for x in yValues]))
                         ax.plot(xValues,oneY,linewidth=line_widths)
                 else:
                     xValues = np.zeros(len(lineList[rows[2*r]:rows[2*r+1]]))
-                    xValues = map(float,[x[lines[0]] for x in lineList[rows[2*r]:rows[2*r+1]]])
+                    xValues = list(map(float,[x[lines[0]] for x in lineList[rows[2*r]:rows[2*r+1]]]))
                     yValues = np.zeros((len(lineList[rows[2*r]:rows[2*r+1]]),len(lines)-1))
 
                     count = 0
-                    for l in map(int,lines[1:]):
+                    for l in list(map(int,lines[1:])):
                         for h in range(len(lineList[rows[2*r]:rows[2*r+1]])):
                             yValues[h][count] = float(lineList[h+rows[2*r]][l])
                         count += 1
 
                     oneY = np.zeros(len(lineList))
                     for l in range(len(lines)-1):
-                        oneY = map(float,[x[l] for x in yValues])
+                        oneY = list(map(float,[x[l] for x in yValues]))
                         ax.plot(xValues,oneY,linewidth=line_widths)
         else:
-            for r in map(float,refers[1:]):
+            for r in list(map(float,refers[1:])):
                 index = []
                 for e in range(len(rows)/2):
                     for h in range(rows[2*e],rows[2*e+1]+1):
@@ -288,7 +288,7 @@ def plot_lines(infile,outfile,figtitle,lines,refers,rows,sline,legend,labels,ifS
                     yValues = np.zeros((len(index),len(lines)-1))
 
                     count = 0
-                    for l in map(int,lines[1:]):
+                    for l in list(map(int,lines[1:])):
                         count2 = 0
                         for h in index:
                             yValues[count2][count] = float(lineList[h][l])
@@ -297,7 +297,7 @@ def plot_lines(infile,outfile,figtitle,lines,refers,rows,sline,legend,labels,ifS
 
                     oneY = np.zeros(len(index))
                     for l in range(len(lines)-1):
-                        oneY = map(float,[x[l] for x in yValues])
+                        oneY = list(map(float,[x[l] for x in yValues]))
                         ax.plot(xValues,oneY,linewidth=line_widths)
                 else:
                     count = 0
@@ -307,7 +307,7 @@ def plot_lines(infile,outfile,figtitle,lines,refers,rows,sline,legend,labels,ifS
                     yValues = np.zeros((len(index),len(lines)-1))
 
                     count = 0
-                    for l in map(int,lines[1:]):
+                    for l in list(map(int,lines[1:])):
                         count2 = 0
                         for h in index:
                             yValues[count2][count] = float(lineList[h][l])
@@ -316,7 +316,7 @@ def plot_lines(infile,outfile,figtitle,lines,refers,rows,sline,legend,labels,ifS
 
                     oneY = np.zeros(len(index))
                     for l in range(len(lines)-1):
-                        oneY = map(float,[x[l] for x in yValues])
+                        oneY = list(map(float,[x[l] for x in yValues]))
                         ax.plot(xValues,oneY,linewidth=line_widths)
     # 绘制图例在曲线绘制之后 这样才能知道是哪些曲线
     if legend[0] != 'null':
@@ -360,17 +360,17 @@ def main(argv):
         elif opt in ("-j", "--jump-head"):
             startLine = int(arg)
         elif opt in ("-r", "--rows"):
-            dataRow = map(int,arg.strip().split(','))
+            dataRow = list(map(int,arg.strip().split(',')))
         elif opt in ("-f", "--ref-index"):
-            refIndex = map(float,arg.strip().split(','))
+            refIndex = list(map(float,arg.strip().split(',')))
         elif opt in ("-d", "--data-line"):
-            dataLine = map(int,arg.strip().split(','))
+            dataLine = list(map(int,arg.strip().split(',')))
         elif opt in ("-l", "--legend"):
-            dataLegend = map(str,arg.strip().split(','))
+            dataLegend = list(map(str,arg.strip().split(',')))
         elif opt in ("-a", "--axis-label"):
-            axisLabel = map(str,arg.strip().split(','))
+            axisLabel = list(map(str,arg.strip().split(',')))
         elif opt in ("-y", "--layout"):
-            defaultLayout = map(int,arg.strip().split(','))
+            defaultLayout = list(map(int,arg.strip().split(',')))
     # 检查参数
     if inputfile == '':
         print("error: no input-file name")
@@ -396,7 +396,7 @@ def main(argv):
     if len(dataRow)%2:
         print("error: -r option only takes an even number of values")
         sys.exit()
-    for i in range(len(dataRow)/2):
+    for i in range(int (len(dataRow)/2)):
         if dataRow[2*i] >= dataRow[2*i+1]:
             print("error: wrong -r option values: "+str(dataRow[2*i])+" "+str(dataRow[2*i+1]))
             sys.exit()
