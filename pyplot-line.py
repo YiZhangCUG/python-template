@@ -244,7 +244,7 @@ def plot_lines(infile,outfile,figtitle,lines,refers,rows,sline,legend,labels,ifS
                         ax.plot(xValues,oneY,linewidth=line_widths)
     else:
         if refers[0] == a_very_big_int:
-            for r in range(len(rows)/2):
+            for r in range(int(len(rows)/2)):
                 if lines[0] < 0:
                     xValues = range(1,len(lineList[rows[2*r]:rows[2*r+1]])+1)
                     yValues = np.zeros((len(lineList[rows[2*r]:rows[2*r+1]]),len(lines)-1))

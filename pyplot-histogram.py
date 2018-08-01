@@ -56,7 +56,7 @@ def plot_lines(infile,outfile,lines,sline,legend,labels,bars,ifSavefig):
     oneY = np.zeros(len(lineList))
     for l in range(len(lines)):
         oneY = list(map(float,[x[l] for x in yValues]))
-        #screen.hist(oneY, bars[l], normed=1,label=legend[l])
+        #screen.hist(oneY, bars[l], density=1,label=legend[l])
         screen.hist(oneY, bars[l],label=legend[l])
     screen.legend(loc='upper right', fontsize='large')
     # 按label绘制轴的单位
