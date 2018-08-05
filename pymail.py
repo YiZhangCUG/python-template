@@ -13,13 +13,15 @@ def disp_help():
 For more information please go to the offical site of smtplib "https://docs.python.org/3.5/library/smtplib.html"\n\
 Sender\'s address and password must be set manually within the script.\n\
 Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)\n')
-    print ('Usage: '+proname[-1]+' [-a<to_address>,<to_address>,...|-A<address-file>] [-s<subject>] [-t<text>|-T<text-file>] [-f<attached_file>,<attached_file>,...]\n\n\
+    print ('Usage: '+proname[-1]+' [-a<to_address>,<to_address>,...|-A<address-file>] [-s<subject>] [-t<text>|-T<text-file>] [-f<attached_file>,<attached_file>,...] [-h] [-d]\n\n\
 -a --to-address\tA list of receiving addresses separated by commas. The default must be set manually within the script.\n\
 -A --ads-file\tRead receiving addresses from a file.\n\
 -s --subject\tSubject of the email. The default must be set manually within the script.\n\
 -t --text\tText message of the email. The default must be set manually within the script.\n\
 -T --text-file\tRead text message from a file.\n\
--f --att-file\tFile attachments separated by commas.')
+-f --att-file\tFile attachments separated by commas.\n\
+-h --help\tShow this information\n\
+-d --defaults\tShow default settings')
 
 '''
 用户名 密码(应用专用密码)
@@ -66,13 +68,17 @@ def main(argv):
     attachFile = None
 
     try:
-        opts, args = getopt.getopt(argv,"ha:A:s:t:T:f:",["help","to-address=","ads-file=","subject=","text=","text-file=","att-file="])
+        opts, args = getopt.getopt(argv,"hda:A:s:t:T:f:",["help","defaults","to-address=","ads-file=","subject=","text=","text-file=","att-file="])
     except getopt.GetoptError:
         disp_help()
         sys.exit(2)
     for opt, arg in opts:
         if opt in ("-h", "--help"):
             disp_help()
+            sys.exit()
+        elif opt in ("-d", "--defaults"):
+            print("username: %s\npassword: %s\nto-address: %s\nsubject: %s\ntext: %s"
+            % (userName,passWord,toAddress,subJect,textMsg))
             sys.exit()
         elif opt in ("-a", "--to-address"):
             toAddress = list(map(str,arg.strip().split(',')))
