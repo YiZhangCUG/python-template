@@ -4,7 +4,7 @@ folderAddress=`pwd`
 # 获取当前用户的根目录
 userAddress=`echo $HOME`
 # 指定安装地址 若不存在则建立
-objectAddress="/usr/local/sbin"
+objectAddress="/usr/local/sbin/python-template"
 if [[ ! -d $objectAddress ]]; then
 	mkdir $objectAddress
 fi
