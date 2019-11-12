@@ -49,7 +49,8 @@ def send_mail(usrname: str, passwd: str,
     #发送文件
     try:
         #邮箱服务器SMTP配置 服务器地址 端口
-        smtp = smtplib.SMTP(host="smtp.gmail.com", port= 587) 
+        #smtp = smtplib.SMTP(host="smtp.gmail.com", port= 587)
+        smtp = smtplib.SMTP(host="smtp.mail.me.com", port= 587) 
         smtp.starttls()
         smtp.login(usrname,passwd)
         smtp.sendmail(send_from, send_to, msg.as_string())
@@ -58,9 +59,9 @@ def send_mail(usrname: str, passwd: str,
         print("fail to sent mail.")
 
 def main(argv):
-    userName = 'zhangyi.cugwuhan@gmail.com'
-    passWord = 'mcumknwyjehhpavu'
-    toAddress = ['zhangyiss@icloud.com']
+    userName = 'zhangyiss@icloud.com'
+    passWord = 'hmxx-ktik-pffp-gasx'
+    toAddress = ['792779110@qq.com']
     adsFile = 'null'
     subJect = 'This is automatic message, please do not reply.'
     textMsg = 'Not written.'
