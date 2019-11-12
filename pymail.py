@@ -28,7 +28,7 @@ Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)\n')
 发件邮箱(一般等于用户名) 收件邮箱(列表)
 主题 文字 文件(地址列表) 默认收件地址
 '''
-def send_mail(usrname: str, passwd: str, 
+def send_mail(hostname: str, portid: str, usrname: str, passwd: str, 
     send_from: str, send_to: list,
     subject: str, text: str, files= None):
     #初始化邮件头信息
@@ -49,8 +49,7 @@ def send_mail(usrname: str, passwd: str,
     #发送文件
     try:
         #邮箱服务器SMTP配置 服务器地址 端口
-        #smtp = smtplib.SMTP(host="smtp.gmail.com", port= 587)
-        smtp = smtplib.SMTP(host="smtp.mail.me.com", port= 587) 
+        smtp = smtplib.SMTP(host = hostname, port = portid) 
         smtp.starttls()
         smtp.login(usrname,passwd)
         smtp.sendmail(send_from, send_to, msg.as_string())
@@ -59,8 +58,19 @@ def send_mail(usrname: str, passwd: str,
         print("fail to sent mail.")
 
 def main(argv):
-    userName = 'zhangyiss@icloud.com'
-    passWord = 'hmxx-ktik-pffp-gasx'
+    # 从文本里读入邮箱设置信息 你也可以直接在此脚本设置 从文件读入只是更加安全一点
+    with open("/Users/zhangyi/.zy_setup/icloud_smtp_info.txt", 'r', encoding='utf-8') as f:
+        dic=[]
+        for line in f.readlines():
+            line=line.strip('\n') #去掉换行符\n
+            b=line.split('=') #将每一行以等号为分隔符转换成列表
+            dic.append(b)
+    dic=dict(dic)
+
+    userName = dic.get('username')
+    passWord = dic.get('passwd')
+    hostName = dic.get('server')
+    portName = dic.get('port')
     toAddress = ['792779110@qq.com']
     adsFile = 'null'
     subJect = 'This is automatic message, please do not reply.'
@@ -106,8 +116,7 @@ def main(argv):
         fp.close()
         pass
 
-    send_mail(userName,passWord,userName,toAddress,subJect,textMsg,attachFile)
-
+    send_mail(hostName,portName,userName,passWord,userName,toAddress,subJect,textMsg,attachFile)
 
 if __name__ == "__main__":
     main(sys.argv[1:])
