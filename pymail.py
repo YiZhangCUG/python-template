@@ -14,12 +14,12 @@ For more information please go to the offical site of smtplib "https://docs.pyth
 Sender\'s address and password must be set manually within the script.\n\
 Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)\n')
     print ('Usage: '+proname[-1]+' [-a<to_address>,<to_address>,...|-A<address-file>] [-s<subject>] [-t<text>|-T<text-file>] [-f<attached_file>,<attached_file>,...] [-h] [-d]\n\n\
--a --to-address\tA list of receiving addresses separated by commas. The default must be set manually within the script.\n\
--A --ads-file\tRead receiving addresses from a file.\n\
--s --subject\tSubject of the email. The default must be set manually within the script.\n\
--t --text\tText message of the email. The default must be set manually within the script.\n\
+-a --to-address\tA list of receiving addresses separated by commas. Default addresses could be set manually within the script.\n\
+-A --ads-file\tRead receiving addresses from a file. Different addresses should be separated by commas.\n\
+-s --subject\tSubject of the email. The default is \"This is automatic message, please do not reply.\".\n\
+-t --text\tText message of the email. The default is \"No content.\".\n\
 -T --text-file\tRead text message from a file.\n\
--f --att-file\tFile attachments separated by commas.\n\
+-f --attached-file\tFile attachments separated by commas.\n\
 -h --help\tShow this information\n\
 -d --defaults\tShow default settings')
 
@@ -72,9 +72,11 @@ def main(argv):
     hostName = dic.get('server')
     portName = dic.get('port')
     toAddress = ['792779110@qq.com']
+    #toPresons = ['Dr. Zhang']
+    #signature = ['pymail']
     adsFile = 'null'
     subJect = 'This is automatic message, please do not reply.'
-    textMsg = 'Not written.'
+    textMsg = 'No content.'
     textFile = 'null'
     attachFile = None
 
