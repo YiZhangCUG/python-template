@@ -3,6 +3,7 @@
 
 import sys, getopt
 import numpy as np
+import copy
 
 def disp_help():
 	proname = (sys.argv[0]).strip().split('/')
@@ -10,7 +11,7 @@ def disp_help():
 Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)\n')
 	print ('Usage: '+proname[-1]+' -i<infile> [-j<head-record>] [-c<column1>,<column2>...] [-s<split-symbol>] [-r<row-min>,<row-max>,<row-min2>,<row-max2>...]\n\
 -i --ifile\tinput table name\n\
--j --jumphead\tskip head records. the default value is 0\n\
+-j --jumphead\tskip head records. the default value is 0. NOTE: any line starts with # will be skipped automatically.\n\
 -c --column\tdata columns. the default value is 1 which represents the third column of a input table\n\
 -s --symbol\tline spliting symbol. the default values are space and tab\n\
 -r --rows\tset begining and ending rows of data that used for calculation, the default will will all data.\n\
@@ -18,8 +19,15 @@ Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)\n')
 -h --help\tshow this information')
 
 def tableinfo(infile,sline,lines,rows,ssymbol):
+	# 按行读取文件 从sline开始按空格分割数据
 	file = open(infile,'r')
 	lineList = file.readlines()
+	# 默认忽略#号开头的行
+	lineList_orig = copy.deepcopy(lineList)
+	for line in lineList_orig:
+		if line.startswith('#'):
+			lineList.remove(line)
+	# 按分隔符解析每行的数据
 	if ssymbol == 'space' or ssymbol == 'tab':
 		lineList = [line.strip().split( ) for line in lineList[sline:]]
 	else:
@@ -46,6 +54,7 @@ def tableinfo(infile,sline,lines,rows,ssymbol):
 			print('mean\t|\t'+str(np.nanmean(list(oneY))))
 			print('std\t|\t'+str(np.nanstd(list(oneY))))
 			print('var\t|\t'+str(np.nanvar(list(oneY))))
+			print('rms\t|\t'+str(np.sqrt(np.nanmean(np.power(oneY,2)))))
 			print('-------------------------------')
 	else:
 		index = []
