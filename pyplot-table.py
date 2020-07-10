@@ -21,7 +21,12 @@ Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)\n')
 -l --legend\tset figure titles, the default is \'data\'. The number of legends must equal the number of data rows\n\
 -a --axis-label\tset x and y axises\' labels, the default are \'x (m)\' and \'y (m)\'\n\
 -s --screen\tonly show the figure on screen and do not save the figure\n\
+-p --polygon\tdraw polygons on the figure\n\
 -h --help\tshow this information')
+
+def tellme(s):
+	plt.title(s, fontsize=14)
+	plt.draw()
 
 def single_figure(fig,ax,data,title,unit,dataRange):
 	cax = ax.imshow(data,cmap=cm.rainbow,
@@ -32,7 +37,7 @@ def single_figure(fig,ax,data,title,unit,dataRange):
 	cbar.ax.set_yticklabels(map(str,np.round(np.linspace(data.min(),data.max(),num=5),2)))
 	cbar.ax.set_ylabel(unit)
 
-def plot_planes(ifile,ofile,lines,sline,interval,legend,labels,unit,ifSavefig):
+def plot_planes(ifile,ofile,lines,sline,interval,legend,labels,unit,ifSavefig, ifPoly):
 	file = open(ifile,'r')
 	lineList = file.readlines()
 	lineList = [line.strip().split( ) for line in lineList[sline:]]
@@ -65,12 +70,34 @@ def plot_planes(ifile,ofile,lines,sline,interval,legend,labels,unit,ifSavefig):
 		ax.set_ylabel(labels[1])
 		single_figure(fig,ax,zValues,legend[f],unit[f],datarange)
 		if not ifSavefig: fig.savefig(ofile[f])
+
+	if (ifPoly):
+		tellme('Click to start draw polygons.\nleft->add right->pop mid->stop')
+		while True:
+			pts = []
+			pts = np.asarray(plt.ginput(-1, timeout=-1))
+
+			if (len(pts) >= 3):
+				ph = plt.fill(pts[:, 0], pts[:, 1], 'green', alpha = 0.3, lw=2)
+
+			if (len(pts) >= 1):
+				print(">")
+				for i in range(len(pts)):
+					print("%lf %lf" % (pts[i][0], pts[i][1]))
+
+			tellme('Press any key to quit drawing polygons.\nleft->add right->pop mid->stop')
+
+			if plt.waitforbuttonpress():
+				tellme('Done drawing polygons.')
+				break
+
 	plt.show()
 
 def main(argv):
 	inputFile = ''
 	outputFile = ['']
 	onlyScreen = False
+	drawPoly = False
 	dataLine = [2]
 	dataLegend = ['data']
 	dataUnit = ['value']
@@ -79,7 +106,7 @@ def main(argv):
 	startLine = 0
 
 	try:
-		opts, args = getopt.getopt(argv,"hi:o:sj:d:l:a:t:u:",["help","ifile=","ofile=","screen","jump-head=","data-line=","legend=","axis-label=","tick=","unit="])
+		opts, args = getopt.getopt(argv,"hi:o:sj:d:l:a:t:u:p",["help","ifile=","ofile=","screen","polygon","jump-head=","data-line=","legend=","axis-label=","tick=","unit="])
 	except getopt.GetoptError:
 		disp_help()
 		sys.exit(2)
@@ -90,21 +117,23 @@ def main(argv):
 		elif opt in ("-i", "--ifile"):
 			inputFile = arg
 		elif opt in ("-o", "--ofile"):
-			outputFile = map(str,arg.strip().split(','))
+			outputFile = list(map(str,arg.strip().split(',')))
 		elif opt in ("-s", "--screen"):
 			onlyScreen = True
+		elif opt in ("-p", "--polygon"):
+			drawPoly = True
 		elif opt in ("-j", "--jump-head"):
 			startLine = int(arg)
 		elif opt in ("-d", "--data-line"):
-			dataLine = map(int,arg.strip().split(','))
+			dataLine = list(map(int,arg.strip().split(',')))
 		elif opt in ("-l", "--legend"):
-			dataLegend = map(str,arg.strip().split(','))
+			dataLegend = list(map(str,arg.strip().split(',')))
 		elif opt in ("-a", "--axis-label"):
-			axisLabel = map(str,arg.strip().split(','))
+			axisLabel = list(map(str,arg.strip().split(',')))
 		elif opt in ("-t", "--tick"):
-			dataInterval = map(float,arg.strip().split('/'))
+			dataInterval = list(map(float,arg.strip().split('/')))
 		elif opt in ("-u", "--unit"):
-			dataUnit = map(str,arg.strip().split(','))
+			dataUnit = list(map(str,arg.strip().split(',')))
 
 	if inputFile == '':
 		disp_help()
@@ -118,7 +147,7 @@ def main(argv):
 		print ('error: -o and -s can not be used at the same time')
 		sys.exit()
 
-	plot_planes(inputFile,outputFile,dataLine,startLine,dataInterval,dataLegend,axisLabel,dataUnit,onlyScreen)
+	plot_planes(inputFile,outputFile,dataLine,startLine,dataInterval,dataLegend,axisLabel,dataUnit,onlyScreen,drawPoly)
 
 if __name__ == "__main__":
 	main(sys.argv[1:])
