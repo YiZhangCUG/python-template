@@ -6,7 +6,7 @@ userAddress=`echo $HOME`
 # 指定安装地址 若不存在则建立
 objectAddress="/usr/local/sbin/python-scripts"
 if [[ ! -d $objectAddress ]]; then
-	mkdir $objectAddress
+	sudo mkdir $objectAddress
 fi
 # 添加安装路径到环境变量中 首先获取当前的环境变量 若安装路径已存在于环境变量中则跳过 否则添加安装地址到环境变量中
 allPATH=`echo $PATH`
@@ -15,7 +15,7 @@ if [[ `echo ${allPATH} | grep "${objectAddress}"` ]]; then
 else
 	breaked=no
 	# 几个经常使用的用户配置文件
-	profileAddress=("${userAddress}/.bash_profile" "${userAddress}/.profile" "${userAddress}/.zshrc")
+	profileAddress=("${userAddress}/.zshrc" "${userAddress}/.bash_profile" "${userAddress}/.profile")
 	for one_address in ${profileAddress[@]}; do
 		if [[ -f ${one_address} ]]; then
 			echo "adding the installation address to ${one_address}"
@@ -47,7 +47,7 @@ for element in ${scriptName[@]}; do
 	#若链接不存在 则建立
 	if [[ ! -L ${objectAddress}/${objectName} ]]; then
 		printf "creating links for "$objectName"... "
-		ln -s ${folderAddress}/${element} ${objectAddress}/${objectName}
+		sudo ln -s ${folderAddress}/${element} ${objectAddress}/${objectName}
 		printf "done\n"
 	fi
 done
