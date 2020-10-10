@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding=utf-8 -*-
+# -*- coding: utf-8 -*-
 
 import smtplib, sys, getopt
 from email.mime.text import MIMEText

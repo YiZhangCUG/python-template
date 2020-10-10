@@ -20,8 +20,8 @@ else
 		if [[ -f ${one_address} ]]; then
 			echo "adding the installation address to ${one_address}"
 			cat <<- EOF >> ${one_address}
-				# this is added by configure.sh of shell-template (zhangyi.cugwuhan@gmail.com)
-				export PATH=${objectAddress}:\$PATH
+				# this is added by configure.sh of python-template (zhangyi.cugwuhan@gmail.com)
+				export PATH="${objectAddress}:\$PATH"
 			EOF
 			source ${one_address}
 			breaked=yes
@@ -33,7 +33,7 @@ else
 		echo "made file ${userAddress}/.bash_profile"
 		echo "adding the installation address to ${userAddress}/.bash_profile"
 		cat <<- EOF > ${userAddress}/.bash_profile
-			# this is added by configure.sh of shell-template (zhangyi.cugwuhan@gmail.com)
+			# this is added by configure.sh of python-template (zhangyi.cugwuhan@gmail.com)
 			export PATH=${objectAddress}:\$PATH
 		EOF
 		source ${userAddress}/.bash_profile
