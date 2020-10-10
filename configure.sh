@@ -34,7 +34,7 @@ else
 		echo "adding the installation address to ${userAddress}/.bash_profile"
 		cat <<- EOF > ${userAddress}/.bash_profile
 			# this is added by configure.sh of python-template (zhangyi.cugwuhan@gmail.com)
-			export PATH=${objectAddress}:\$PATH
+			export PATH="${objectAddress}:\$PATH"
 		EOF
 		source ${userAddress}/.bash_profile
 	fi
