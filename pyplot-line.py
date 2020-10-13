@@ -320,7 +320,7 @@ def plot_lines(infile,outfile,figtitle,lines,refers,rows,sline,legend,labels,ifS
                         ax.plot(xValues,oneY,linewidth=line_widths)
     # 绘制图例在曲线绘制之后 这样才能知道是哪些曲线
     if legend[0] != 'null':
-        ax.legend(legend,loc='best', fontsize=legend_size, facecolor='2', edgecolor='2')
+        ax.legend(legend,loc='best', fontsize=legend_size, facecolor='1', edgecolor='1')
     plt.show()
     if not ifSavefig:
         fig.savefig(outfile,dpi=save_dpi,transparent=True,bbox_inches='tight',pad_inches=0)
