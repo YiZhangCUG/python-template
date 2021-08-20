@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sys, getopt
+import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.axes as axes
 import matplotlib.font_manager as font_manager
@@ -39,6 +40,8 @@ Author: Yi Zhang (zhangyi.cugwuhan@gmail.com)')
 -h --help\tshow this information.')
 
 def plot_lines(infile,outfile,figtitle,lines,refers,rows,sline,legend,labels,ifSavefig,style):
+    # 设置matplotlib的后端 创建新的窗口显示图片
+    matplotlib.use('TkAgg')
     # 循环绘图 按legend绘制图例
     fig, ax = plt.subplots()
     # 设置布局 部分参数设置在函数最后完成 如图例参数 图片保存参数 注意这个参数会循环所有参数并覆盖
