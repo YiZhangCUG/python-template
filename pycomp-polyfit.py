@@ -32,11 +32,11 @@ def plot_lines(infile,outfile,lines,rows,degrees,sline,legend,labels,ifSavefig):
     # 初始化数组 默认第一列为x轴
     if rows[0] == -1:
         xValues = np.zeros(len(lineList))
-        xValues = map(float,[x[lines[0]] for x in lineList])
+        xValues = list(map(float,[x[lines[0]] for x in lineList]))
         yValues = np.zeros((len(lineList),len(lines)-1))
     else:
         xValues = np.zeros(len(lineList[rows[0]:rows[1]]))
-        xValues = map(float,[x[lines[0]] for x in lineList[rows[0]:rows[1]]])
+        xValues = list(map(float,[x[lines[0]] for x in lineList[rows[0]:rows[1]]]))
         yValues = np.zeros((len(lineList[rows[0]:rows[1]]),len(lines)-1))
     # 按lines提取lineList中的特定列
     if rows[0] == -1:
@@ -61,14 +61,15 @@ def plot_lines(infile,outfile,lines,rows,degrees,sline,legend,labels,ifSavefig):
             oneY = np.zeros(len(lineList[rows[0]:rows[1]])) #创建Y数组和fit数组
             fitY = np.zeros(len(lineList[rows[0]:rows[1]]))
 
-        oneY = map(float,[x[f] for x in yValues])
+        oneY = list(map(float,[x[f] for x in yValues]))
         # 执行多项式拟合
         polyline = np.poly1d(np.polyfit(xValues,oneY,degrees))
         fitY = polyline(xValues)
         # 计算均方根
         diff = np.sqrt(np.sum((oneY-fitY)**2))
         # 绘图
-        screen.plot(xValues,oneY,'-',label=legend[f])
+        # screen.plot(xValues,oneY,'-',label=legend[f])
+        screen.scatter(xValues,oneY,label=legend[f])
         screen.plot(xValues,fitY,'--',label=legend[f]+"-polyfit")
         # 定位显示均方根的位置
         xMin = np.min(xValues)
